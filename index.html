@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kova — The Smart Campus Display System</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kova-blue: #2563EB;
+  --kova-blue-light: #EFF6FF;
+  --kova-blue-mid: #BFDBFE;
+  --kova-green: #059669;
+  --kova-green-light: #ECFDF5;
+  --kova-amber: #D97706;
+  --kova-amber-light: #FFFBEB;
+  --kova-purple: #7C3AED;
+  --kova-purple-light: #F5F3FF;
+  --kova-coral: #DC2626;
+  --kova-coral-light: #FEF2F2;
+  --ink: #0F172A;
+  --ink-mid: #334155;
+  --ink-light: #64748B;
+  --ink-faint: #94A3B8;
+  --rule: #E2E8F0;
+  --bg: #FFFFFF;
+  --bg-off: #F8FAFC;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--ink); letter-spacing: -0.5px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--kova-blue); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--ink-mid);
+  text-decoration: none; transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--kova-blue); }
+.nav-cta {
+  background: var(--kova-blue); color: #fff;
+  padding: 9px 20px; border-radius: 10px;
+  font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: all 0.15s;
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.nav-cta:hover { background: #1D4ED8; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 120px 5% 80px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 800px 600px at 20% 50%, #EFF6FF 0%, transparent 70%),
+    radial-gradient(ellipse 600px 500px at 80% 30%, #F5F3FF 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 60% 80%, #ECFDF5 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--kova-blue-light); color: var(--kova-blue);
+  border: 1px solid var(--kova-blue-mid);
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+  margin-bottom: 28px; position: relative; z-index: 1;
+  animation: fadeUp 0.6s ease both;
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--kova-blue);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+
+.hero h1 {
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 800; line-height: 1.02;
+  letter-spacing: -2px; color: var(--ink);
+  max-width: 900px; margin-bottom: 24px;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--kova-blue), var(--kova-purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(17px, 2vw, 20px); font-weight: 300;
+  color: var(--ink-mid); max-width: 560px; line-height: 1.65;
+  margin-bottom: 40px; position: relative; z-index: 1;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  justify-content: center; position: relative; z-index: 1;
+  animation: fadeUp 0.6s 0.3s ease both;
+  margin-bottom: 72px;
+}
+.btn-primary {
+  background: var(--kova-blue); color: #fff;
+  padding: 14px 28px; border-radius: 12px;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+}
+.btn-primary:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,0.4); }
+.btn-secondary {
+  background: #fff; color: var(--ink);
+  padding: 14px 28px; border-radius: 12px;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s;
+  border: 1.5px solid var(--rule);
+}
+.btn-secondary:hover { border-color: #CBD5E1; transform: translateY(-2px); }
+
+/* HERO DEVICES */
+.hero-devices {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 20px; position: relative; z-index: 1;
+  animation: fadeUp 0.8s 0.4s ease both;
+  flex-wrap: wrap;
+}
+.device-mockup {
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.12), 0 0 0 1px rgba(15,23,42,0.06);
+  position: relative; flex-shrink: 0;
+}
+.device-halo {
+  width: 180px; height: 180px; border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #c7f2e8 0%, #bee3f8 50%, #d4c5f9 100%);
+  border: 4px solid rgba(255,255,255,0.9);
+  box-shadow: 0 20px 60px rgba(15,23,42,0.15);
+}
+.device-halo-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px; font-weight: 700; color: #0F172A; line-height: 1;
+}
+.device-halo-name { font-size: 11px; color: #334155; margin-top: 4px; }
+.device-halo-sub { font-size: 10px; color: #64748B; margin-top: 3px; }
+.device-rect {
+  width: 240px; border-radius: 18px;
+  background: linear-gradient(135deg, #c7f2e8 0%, #bee3f8 100%);
+  padding: 18px; border: 3px solid rgba(255,255,255,0.9);
+  box-shadow: 0 20px 60px rgba(15,23,42,0.15);
+}
+.device-rect-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px; font-weight: 700; color: #0F172A; line-height: 1;
+}
+.device-rect-date { font-size: 13px; color: #334155; margin-bottom: 6px; }
+.device-rect-period { font-size: 12px; color: #64748B; }
+.device-rect-school { font-size: 11px; color: #64748B; margin-bottom: 10px; }
+.alert-chip {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+.device-label {
+  text-align: center; font-size: 11px; font-weight: 500;
+  color: var(--ink-faint); margin-top: 10px; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* LOGOS / SOCIAL PROOF */
+.proof-bar {
+  background: var(--bg-off); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 24px 5%; text-align: center;
+}
+.proof-bar p { font-size: 13px; color: var(--ink-faint); margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
+.proof-logos { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.proof-logo {
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+  color: #CBD5E1; letter-spacing: -0.3px;
+}
+
+/* SECTIONS */
+section { padding: 96px 5%; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--kova-blue);
+  margin-bottom: 14px;
+}
+.section-heading {
+  font-size: clamp(32px, 4vw, 52px); font-weight: 800;
+  letter-spacing: -1.5px; line-height: 1.1;
+  color: var(--ink); margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 18px; font-weight: 300; color: var(--ink-mid);
+  max-width: 540px; line-height: 1.65;
+}
+
+/* PROBLEM / SOLUTION */
+.problem-section { background: var(--bg); }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 56px;
+}
+.problem-card {
+  padding: 28px; border-radius: var(--radius-lg);
+  border: 1.5px solid var(--rule);
+}
+.problem-card.bad {
+  background: #FAFAFA;
+}
+.problem-card.good {
+  background: var(--kova-blue-light);
+  border-color: var(--kova-blue-mid);
+}
+.prob-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.prob-eyebrow.bad { color: #94A3B8; }
+.prob-eyebrow.good { color: var(--kova-blue); }
+.prob-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-bottom: 14px; font-size: 15px; color: var(--ink-mid);
+  line-height: 1.5;
+}
+.prob-icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0; margin-top: 1px; font-weight: 700;
+}
+.prob-icon.x { background: #FEE2E2; color: #DC2626; }
+.prob-icon.check { background: #DCFCE7; color: #16A34A; }
+
+/* PRODUCTS */
+.products-section { background: var(--bg-off); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px; margin-top: 56px;
+}
+.product-card {
+  background: #fff; border-radius: var(--radius-lg);
+  border: 1.5px solid var(--rule); overflow: hidden;
+  transition: all 0.2s; position: relative;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15,23,42,0.1);
+  border-color: transparent;
+}
+.product-card.featured {
+  border-color: var(--kova-blue);
+  box-shadow: 0 0 0 1px var(--kova-blue), 0 8px 30px rgba(37,99,235,0.15);
+}
+.featured-tag {
+  position: absolute; top: 0; right: 20px;
+  background: var(--kova-blue); color: #fff;
+  font-size: 10px; font-weight: 600; padding: 3px 10px;
+  border-radius: 0 0 8px 8px; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.product-preview {
+  height: 160px; display: flex;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.prod-circle {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border: 3px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.prod-circle-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700; color: #0F172A;
+}
+.prod-circle-label { font-size: 7px; font-weight: 600; letter-spacing: 0.08em; color: #334155; margin-top: 2px; text-transform: uppercase; }
+.prod-rect {
+  width: 160px; border-radius: 12px; padding: 12px 14px;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.prod-rect-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 700; color: #0F172A; line-height: 1;
+}
+.prod-rect-info { font-size: 11px; color: #64748B; margin-top: 4px; }
+.prod-portrait {
+  width: 90px; border-radius: 14px; padding: 10px;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.prod-portrait-top { font-size: 9px; color: #64748B; }
+.prod-portrait-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700; color: #0F172A; line-height: 1;
+}
+.prod-portrait-btn {
+  background: #0F172A; color: #fff; font-size: 8px; font-weight: 600;
+  padding: 4px; border-radius: 6px; text-align: center; margin-top: 4px;
+  letter-spacing: 0.05em;
+}
+.product-info { padding: 18px 20px 20px; }
+.product-family {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.product-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px; letter-spacing: -0.3px;
+}
+.product-desc { font-size: 13px; color: var(--ink-light); line-height: 1.55; margin-bottom: 12px; }
+.product-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.product-tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 20px;
+  font-weight: 500;
+}
+
+/* HOW IT WORKS */
+.hiw-section { background: var(--bg); }
+.hiw-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0; margin-top: 56px;
+  border: 1.5px solid var(--rule); border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.hiw-step {
+  padding: 32px 28px;
+  border-right: 1.5px solid var(--rule);
+  position: relative; transition: background 0.2s;
+}
+.hiw-step:last-child { border-right: none; }
+.hiw-step:hover { background: var(--bg-off); }
+.hiw-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700; color: var(--kova-blue);
+  margin-bottom: 16px; letter-spacing: 0.05em;
+}
+.hiw-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 16px;
+}
+.hiw-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700; color: var(--ink);
+  margin-bottom: 8px; letter-spacing: -0.3px;
+}
+.hiw-desc { font-size: 14px; color: var(--ink-light); line-height: 1.6; }
+
+/* ALERT SHOWCASE */
+.alerts-section {
+  background: var(--ink); color: #fff;
+  position: relative; overflow: hidden;
+}
+.alerts-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 80% 50%, rgba(37,99,235,0.15) 0%, transparent 70%);
+}
+.alerts-section .section-label { color: #60A5FA; }
+.alerts-section .section-heading { color: #fff; }
+.alerts-section .section-sub { color: #94A3B8; }
+.alerts-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; margin-top: 48px; position: relative; z-index: 1;
+}
+.alert-card {
+  border-radius: 14px; padding: 20px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: transform 0.2s;
+}
+.alert-card:hover { transform: translateY(-3px); }
+.alert-card-dot { width: 32px; height: 32px; border-radius: 50%; margin-bottom: 4px; }
+.alert-card-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700; color: #fff;
+}
+.alert-card-desc { font-size: 12px; line-height: 1.5; opacity: 0.7; color: #fff; }
+
+/* PRICING */
+.pricing-section { background: var(--bg-off); }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px; margin-top: 56px; align-items: start;
+}
+.price-card {
+  background: #fff; border-radius: var(--radius-lg);
+  border: 1.5px solid var(--rule); padding: 28px 24px;
+  transition: all 0.2s;
+}
+.price-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(15,23,42,0.08); }
+.price-card.featured-price {
+  background: var(--kova-blue); color: #fff;
+  border-color: var(--kova-blue);
+  box-shadow: 0 8px 30px rgba(37,99,235,0.35);
+}
+.price-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 4px;
+}
+.price-sub { font-size: 13px; opacity: 0.7; margin-bottom: 20px; }
+.price-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px; font-weight: 800; letter-spacing: -1px;
+  margin-bottom: 4px;
+}
+.price-amount span { font-size: 16px; font-weight: 400; letter-spacing: 0; }
+.price-note { font-size: 12px; opacity: 0.6; margin-bottom: 24px; }
+.price-divider { height: 1px; background: var(--rule); margin-bottom: 20px; }
+.price-card.featured-price .price-divider { background: rgba(255,255,255,0.2); }
+.price-feature {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13px; margin-bottom: 11px; line-height: 1.45;
+}
+.price-check { color: #34D399; font-size: 14px; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+.price-card.featured-price .price-check { color: #A7F3D0; }
+.price-cta {
+  display: block; text-align: center;
+  padding: 12px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; margin-top: 20px;
+  transition: all 0.15s;
+}
+.price-cta-outline {
+  background: transparent; color: var(--kova-blue);
+  border: 1.5px solid var(--kova-blue-mid);
+}
+.price-cta-outline:hover { background: var(--kova-blue-light); }
+.price-cta-white {
+  background: #fff; color: var(--kova-blue);
+  border: none;
+}
+.price-cta-white:hover { background: #F0F9FF; }
+
+/* CTA / WAITLIST */
+.cta-section {
+  background: var(--bg); padding: 96px 5%;
+  text-align: center;
+}
+.cta-box {
+  max-width: 640px; margin: 0 auto;
+  background: linear-gradient(135deg, var(--kova-blue) 0%, var(--kova-purple) 100%);
+  border-radius: var(--radius-xl); padding: 64px 48px;
+  color: #fff;
+  box-shadow: 0 24px 80px rgba(37,99,235,0.3);
+}
+.cta-box h2 {
+  font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+  letter-spacing: -1px; margin-bottom: 14px; color: #fff;
+}
+.cta-box p { font-size: 16px; opacity: 0.8; margin-bottom: 32px; line-height: 1.6; }
+.waitlist-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+.waitlist-input {
+  flex: 1; padding: 13px 16px; border-radius: 10px;
+  border: none; font-size: 14px; font-family: 'DM Sans', sans-serif;
+  outline: none; background: rgba(255,255,255,0.15);
+  color: #fff; backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.waitlist-input::placeholder { color: rgba(255,255,255,0.55); }
+.waitlist-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.2); }
+.waitlist-btn {
+  background: #fff; color: var(--kova-blue);
+  padding: 13px 22px; border-radius: 10px;
+  border: none; font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.waitlist-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+.cta-note { font-size: 12px; opacity: 0.55; margin-top: 14px; }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: #94A3B8;
+  padding: 48px 5% 32px;
+}
+.footer-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 32px;
+  padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+}
+.footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px;
+}
+.footer-brand span { color: #60A5FA; }
+.footer-tagline { font-size: 13px; color: #64748B; }
+.footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+.footer-col h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700; color: #fff;
+  margin-bottom: 14px; letter-spacing: 0.05em;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: #64748B;
+  text-decoration: none; margin-bottom: 9px; transition: color 0.15s;
+}
+.footer-col a:hover { color: #94A3B8; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; font-size: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hiw-steps { grid-template-columns: 1fr; }
+  .hiw-step { border-right: none; border-bottom: 1.5px solid var(--rule); }
+  .hiw-step:last-child { border-bottom: none; }
+  .waitlist-form { flex-direction: column; }
+  .footer-links { gap: 24px; }
+  .hero-devices { gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Kova<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request a demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Introducing ClockOS — built for schools
+  </div>
+
+  <h1>The campus display<br>that <em>actually works</em></h1>
+
+  <p class="hero-sub">
+    Kova replaces the outdated classroom clock and intercom with a smart, networked display system — instant alerts, live schedules, and full customization managed from one dashboard.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request a demo</a>
+    <a href="#products" class="btn-secondary">See the products</a>
+  </div>
+
+  <div class="hero-devices">
+    <div>
+      <div class="device-halo">
+        <div class="device-halo-time">10:24</div>
+        <div class="device-halo-name">Sandpine Middle</div>
+        <div class="device-halo-sub">Period 3 · 18 min left</div>
+      </div>
+      <div class="device-label">Halo</div>
+    </div>
+
+    <div>
+      <div class="device-rect">
+        <div class="device-rect-school">Lets R.I.S.E. Panthers</div>
+        <div class="device-rect-date">Thursday, Feb 5th</div>
+        <div class="device-rect-time">10:24</div>
+        <div class="device-rect-period" style="margin-top:6px;margin-bottom:10px">Period 1 · No Events</div>
+        <span class="alert-chip" style="background:#DCFCE7;color:#15803D">● All Clear</span>
+      </div>
+      <div class="device-label">Beacon+</div>
+    </div>
+
+    <div>
+      <div class="device-rect" style="width:130px;background:linear-gradient(135deg,#0F172A,#1E293B);border-color:rgba(255,255,255,0.1)">
+        <div style="font-size:9px;color:#94A3B8;margin-bottom:6px">Room 104</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1">10:24</div>
+        <div style="font-size:9px;color:#94A3B8;margin-top:4px;margin-bottom:10px">Feb 5 · Period 3</div>
+        <span class="alert-chip" style="background:rgba(220,38,38,0.2);color:#FCA5A5;border:1px solid rgba(220,38,38,0.3)">🔴 FIRE ALARM</span>
+      </div>
+      <div class="device-label">Alert Active</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <p>Designed for K–12 districts, hospitals, and corporate campuses</p>
+  <div class="proof-logos">
+    <span class="proof-logo">Sandpine USD</span>
+    <span class="proof-logo">Northfield K–12</span>
+    <span class="proof-logo">Crestview Medical</span>
+    <span class="proof-logo">Lakewood ISD</span>
+    <span class="proof-logo">Meridian Corp</span>
+  </div>
+</div>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="problem-section" id="how-it-works">
+  <div class="section-label">The problem</div>
+  <h2 class="section-heading">Your walls deserve better<br>than 1990s hardware.</h2>
+  <p class="section-sub">The intercom clock on every classroom wall hasn't changed in decades. Kova fixes that.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card bad">
+      <div class="prob-eyebrow bad">Today's classroom intercom</div>
+      <div class="prob-item"><div class="prob-icon x">✕</div>Analog clock. Just shows the time. Nothing else.</div>
+      <div class="prob-item"><div class="prob-icon x">✕</div>Crackly speaker with no visual confirmation of alerts.</div>
+      <div class="prob-item"><div class="prob-icon x">✕</div>Emergency alerts are audio-only — easily missed in noisy rooms.</div>
+      <div class="prob-item"><div class="prob-icon x">✕</div>Zero customization. No school branding, no schedule display.</div>
+      <div class="prob-item"><div class="prob-icon x">✕</div>Requires physical access to update or replace.</div>
+    </div>
+    <div class="problem-card good">
+      <div class="prob-eyebrow good">Kova solves this</div>
+      <div class="prob-item"><div class="prob-icon check">✓</div>Smart display showing time, schedule, period, and announcements.</div>
+      <div class="prob-item"><div class="prob-icon check">✓</div>Full-screen color alerts impossible to miss from across the room.</div>
+      <div class="prob-item"><div class="prob-icon check">✓</div>Instant alerts pushed to every device in under 100ms.</div>
+      <div class="prob-item"><div class="prob-icon check">✓</div>Custom school branding, colors, logo, and bell schedule.</div>
+      <div class="prob-item"><div class="prob-icon check">✓</div>Managed remotely via the ClockOS admin dashboard.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS STEPS -->
+<section style="background:var(--bg-off);padding:96px 5%">
+  <div class="section-label">How it works</div>
+  <h2 class="section-heading">Up and running in a day.</h2>
+  <p class="section-sub">No new wiring. No IT contractor. Mounts where your existing clock is.</p>
+
+  <div class="hiw-steps">
+    <div class="hiw-step">
+      <div class="hiw-num">01</div>
+      <div class="hiw-icon" style="background:#EFF6FF">🔧</div>
+      <div class="hiw-title">Mount & connect</div>
+      <div class="hiw-desc">Kova mounts directly where your existing clock is. One ethernet cable for power and data via PoE — no electrician needed.</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">02</div>
+      <div class="hiw-icon" style="background:#F5F3FF">⚙️</div>
+      <div class="hiw-title">Configure in ClockOS</div>
+      <div class="hiw-desc">Add your school name, logo, colors, and bell schedule in the web-based admin dashboard. Takes about 10 minutes per building.</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">03</div>
+      <div class="hiw-icon" style="background:#ECFDF5">📡</div>
+      <div class="hiw-title">Manage remotely</div>
+      <div class="hiw-desc">Push alerts, update schedules, and monitor every device from anywhere — no physical access required. Works from phone or desktop.</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">04</div>
+      <div class="hiw-icon" style="background:#FEF3C7">🔔</div>
+      <div class="hiw-title">Alert in one tap</div>
+      <div class="hiw-desc">One click in the dashboard sends a full-screen color alert to every Kova device in the building — or target specific rooms and floors.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-label">The product line</div>
+  <h2 class="section-heading">One ecosystem.<br>Every room.</h2>
+  <p class="section-sub">From premium circular classroom displays to budget hallway units — all running ClockOS.</p>
+
+  <div class="products-grid">
+    <div class="product-card featured">
+      <div class="featured-tag">Most popular</div>
+      <div class="product-preview" style="background:linear-gradient(135deg,#EFF6FF,#F5F3FF)">
+        <div class="prod-circle" style="background:linear-gradient(135deg,#c7f2e8,#bee3f8,#d4c5f9)">
+          <div class="prod-circle-time">10:24</div>
+          <div class="prod-circle-label">All Clear</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-blue)">Halo Family</div>
+        <div class="product-name">Halo</div>
+        <div class="product-desc">The premium circular classroom display. LED ring alerts, full ClockOS, built-in speaker.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#EFF6FF;color:#1D4ED8">Circular</span>
+          <span class="product-tag" style="background:#ECFDF5;color:#065F46">LED Ring</span>
+          <span class="product-tag" style="background:#F5F3FF;color:#5B21B6">Premium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-preview" style="background:linear-gradient(135deg,#EFF6FF,#F0FDF4)">
+        <div class="prod-circle" style="background:linear-gradient(135deg,#c7f2e8,#bee3f8);width:130px;height:130px">
+          <div class="prod-circle-time" style="font-size:26px">10:24</div>
+          <div style="font-size:8px;color:#334155;margin-top:2px">Sandpine Middle</div>
+          <div style="font-size:7px;color:#64748B;margin-top:1px">Welcome ↑</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-blue)">Halo Family</div>
+        <div class="product-name">Entry</div>
+        <div class="product-desc">Circular entrance display. Visitor welcome, check-in, and emergency lockout.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#EFF6FF;color:#1D4ED8">Circular</span>
+          <span class="product-tag" style="background:#FEF3C7;color:#92400E">Entrance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-preview" style="background:linear-gradient(135deg,#F0FDF4,#ECFDF5)">
+        <div class="prod-rect" style="background:linear-gradient(135deg,#c7f2e8,#bee3f8);width:180px">
+          <div style="font-size:10px;color:#64748B;margin-bottom:4px">Thursday, Feb 5th</div>
+          <div class="prod-rect-time">10:24</div>
+          <div class="prod-rect-info">Period 1 · No Events</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-green)">Beacon Family</div>
+        <div class="product-name">Beacon</div>
+        <div class="product-desc">Budget rectangular display for hallways, gyms, and cafeterias. Full ClockOS included.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#ECFDF5;color:#065F46">Rectangular</span>
+          <span class="product-tag" style="background:#F0FDF4;color:#166534">Budget</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-preview" style="background:linear-gradient(135deg,#F0FDF4,#EFF6FF)">
+        <div class="prod-rect" style="background:linear-gradient(135deg,#c7f2e8,#bee3f8)">
+          <div style="font-size:10px;color:#64748B;margin-bottom:2px">Lets R.I.S.E. Panthers</div>
+          <div style="font-size:10px;color:#64748B;margin-bottom:4px">Thursday, Feb 5th</div>
+          <div class="prod-rect-time">10:24</div>
+          <div class="prod-rect-info">Period 1 · No Events</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-green)">Beacon Family</div>
+        <div class="product-name">Beacon+</div>
+        <div class="product-desc">Beacon with Halo-level features — LED edge strip, school branding, and optional mic.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#ECFDF5;color:#065F46">Rectangular</span>
+          <span class="product-tag" style="background:#EFF6FF;color:#1D4ED8">LED Strip</span>
+          <span class="product-tag" style="background:#F5F3FF;color:#5B21B6">Mid-tier</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-preview" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7)">
+        <div style="background:linear-gradient(135deg,#111827,#1F2937);border-radius:14px;padding:12px 14px;width:200px;box-shadow:0 8px 24px rgba(0,0,0,0.15)">
+          <div style="font-size:10px;color:#94A3B8;margin-bottom:6px">12:15 · Thursday, Feb 5th</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="background:#854D0E;border-radius:8px;padding:8px;text-align:center;font-size:10px;font-weight:700;color:#FEF3C7">HOLD</div>
+            <div style="background:#7F1D1D;border-radius:8px;padding:8px;text-align:center;font-size:10px;font-weight:700;color:#FECACA">SECURE</div>
+            <div style="background:#7C2D12;border-radius:8px;padding:8px;text-align:center;font-size:10px;font-weight:700;color:#FED7AA">EVACUATE</div>
+            <div style="background:#1E3A5F;border-radius:8px;padding:8px;text-align:center;font-size:10px;font-weight:700;color:#BFDBFE">SHELTER</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-amber)">Beacon Family</div>
+        <div class="product-name">Pulse</div>
+        <div class="product-desc">Alert-grid display for safety offices and secure areas. All protocols visible at a glance.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#FFFBEB;color:#92400E">Rectangular</span>
+          <span class="product-tag" style="background:#FEF2F2;color:#991B1B">Alert-focused</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-preview" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE)">
+        <div class="prod-portrait" style="background:linear-gradient(160deg,#c7f2e8,#bee3f8);height:130px;justify-content:space-between;width:100px">
+          <div>
+            <div class="prod-portrait-top">10:24 · Period 3</div>
+            <div class="prod-portrait-time">10:24</div>
+            <div style="font-size:8px;color:#64748B;margin-top:2px">No Events</div>
+          </div>
+          <div class="prod-portrait-btn">ANNOUNCE</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-family" style="color:var(--kova-purple)">Standalone</div>
+        <div class="product-name">Intercom</div>
+        <div class="product-desc">Portrait display with retractable mic arm and physical Announce button. Two-way audio built in.</div>
+        <div class="product-tags">
+          <span class="product-tag" style="background:#F5F3FF;color:#5B21B6">Portrait</span>
+          <span class="product-tag" style="background:#EDE9FE;color:#4C1D95">Two-way audio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALERTS -->
+<section class="alerts-section">
+  <div class="alerts-bg"></div>
+  <div style="position:relative;z-index:1">
+    <div class="section-label">Alert system</div>
+    <h2 class="section-heading">Every protocol.<br>One push.</h2>
+    <p class="section-sub" style="color:#94A3B8">ClockOS supports all Standard Response Protocol and ALICE alert types. Push to every device in the building in under 100ms.</p>
+
+    <div class="alerts-grid">
+      <div class="alert-card" style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2)">
+        <div class="alert-card-dot" style="background:#22C55E"></div>
+        <div class="alert-card-name">All Clear</div>
+        <div class="alert-card-desc">Resume normal operations</div>
+      </div>
+      <div class="alert-card" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.2)">
+        <div class="alert-card-dot" style="background:#EAB308"></div>
+        <div class="alert-card-name">Hold</div>
+        <div class="alert-card-desc">Clear hallways, stay in rooms</div>
+      </div>
+      <div class="alert-card" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2)">
+        <div class="alert-card-dot" style="background:#3B82F6"></div>
+        <div class="alert-card-name">Secure</div>
+        <div class="alert-card-desc">Lock exterior doors</div>
+      </div>
+      <div class="alert-card" style="background:rgba(30,58,255,0.15);border:1px solid rgba(30,58,255,0.25)">
+        <div class="alert-card-dot" style="background:#1E3AFF"></div>
+        <div class="alert-card-name">Lockdown</div>
+        <div class="alert-card-desc">Secure all rooms immediately</div>
+      </div>
+      <div class="alert-card" style="background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.2)">
+        <div class="alert-card-dot" style="background:#F97316"></div>
+        <div class="alert-card-name">Evacuate</div>
+        <div class="alert-card-desc">Exit via assigned route</div>
+      </div>
+      <div class="alert-card" style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.2)">
+        <div class="alert-card-dot" style="background:#A855F7"></div>
+        <div class="alert-card-name">Shelter</div>
+        <div class="alert-card-desc">Severe weather or hazmat</div>
+      </div>
+      <div class="alert-card" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2)">
+        <div class="alert-card-dot" style="background:#EF4444"></div>
+        <div class="alert-card-name">Fire Alarm</div>
+        <div class="alert-card-desc">Evacuate now — RACE protocol</div>
+      </div>
+      <div class="alert-card" style="background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.15)">
+        <div class="alert-card-dot" style="background:#94A3B8"></div>
+        <div class="alert-card-name">Standby</div>
+        <div class="alert-card-desc">Await further instruction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-heading">Simple, transparent pricing.</h2>
+  <p class="section-sub">One-time hardware purchase. ClockOS admin dashboard included free with every order.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Beacon</div>
+      <div class="price-sub">Rectangular · Budget</div>
+      <div class="price-amount">$TBD<span>/unit</span></div>
+      <div class="price-note">One-time purchase · ClockOS included</div>
+      <div class="price-divider"></div>
+      <div class="price-feature"><span class="price-check">✓</span>Full ClockOS with all 16 screen states</div>
+      <div class="price-feature"><span class="price-check">✓</span>Dual speakers for PA audio</div>
+      <div class="price-feature"><span class="price-check">✓</span>Real-time alert push</div>
+      <div class="price-feature"><span class="price-check">✓</span>PoE powered — single cable install</div>
+      <div class="price-feature"><span class="price-check">✓</span>Admin dashboard access</div>
+      <a href="#contact" class="price-cta price-cta-outline">Get a quote</a>
+    </div>
+
+    <div class="price-card featured-price">
+      <div class="price-name">Halo</div>
+      <div class="price-sub">Circular · Premium</div>
+      <div class="price-amount">$TBD<span>/unit</span></div>
+      <div class="price-note">One-time purchase · ClockOS included</div>
+      <div class="price-divider"></div>
+      <div class="price-feature"><span class="price-check">✓</span>Everything in Beacon</div>
+      <div class="price-feature"><span class="price-check">✓</span>Signature circular display</div>
+      <div class="price-feature"><span class="price-check">✓</span>RGB LED ring alert lighting</div>
+      <div class="price-feature"><span class="price-check">✓</span>School branding + custom colors</div>
+      <div class="price-feature"><span class="price-check">✓</span>Priority support + warranty</div>
+      <a href="#contact" class="price-cta price-cta-white">Get a quote</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Intercom</div>
+      <div class="price-sub">Portrait · Two-way audio</div>
+      <div class="price-amount">$TBD<span>/unit</span></div>
+      <div class="price-note">One-time purchase · ClockOS included</div>
+      <div class="price-divider"></div>
+      <div class="price-feature"><span class="price-check">✓</span>Everything in Beacon+</div>
+      <div class="price-feature"><span class="price-check">✓</span>Retractable mic arm</div>
+      <div class="price-feature"><span class="price-check">✓</span>Physical Announce button</div>
+      <div class="price-feature"><span class="price-check">✓</span>Two-way office audio</div>
+      <div class="price-feature"><span class="price-check">✓</span>Portrait orientation</div>
+      <a href="#contact" class="price-cta price-cta-outline">Get a quote</a>
+    </div>
+
+    <div class="price-card" style="border-style:dashed">
+      <div class="price-name" style="color:var(--ink-light)">ClockOS Lite</div>
+      <div class="price-sub">Software license</div>
+      <div class="price-amount" style="font-size:28px;color:var(--ink-light)">Coming<span style="font-size:14px"> soon</span></div>
+      <div class="price-note">For schools with existing displays</div>
+      <div class="price-divider"></div>
+      <div class="price-feature" style="color:var(--ink-light)"><span class="price-check" style="color:var(--ink-faint)">✓</span>Alert push system</div>
+      <div class="price-feature" style="color:var(--ink-light)"><span class="price-check" style="color:var(--ink-faint)">✓</span>Bell schedule display</div>
+      <div class="price-feature" style="color:var(--ink-light)"><span class="price-check" style="color:var(--ink-faint)">✓</span>Custom branding</div>
+      <div class="price-feature" style="color:var(--ink-light)"><span class="price-check" style="color:var(--ink-faint)">✓</span>Runs on existing hardware</div>
+      <a href="#contact" class="price-cta price-cta-outline" style="opacity:0.5">Join waitlist</a>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:13px;color:var(--ink-faint);margin-top:28px">
+    District pricing available for orders of 10+ units. E-Rate Category 2 eligible. Contact us for a formal quote.
+  </p>
+</section>
+
+<!-- WAITLIST / CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-box">
+    <h2>Ready to upgrade<br>every classroom?</h2>
+    <p>Join the waitlist for early access, district pricing, and a free pilot program for qualifying schools.</p>
+    <div class="waitlist-form">
+      <input class="waitlist-input" type="email" placeholder="Enter your school email" id="email-input"/>
+      <button class="waitlist-btn" onclick="handleSubmit()">Join waitlist</button>
+    </div>
+    <p class="cta-note" id="form-note">No spam. Unsubscribe anytime. For school districts and administrators only.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Kova<span>.</span></div>
+      <div class="footer-tagline">Smart campus displays, built for schools.</div>
+      <div style="margin-top:12px;font-size:12px;color:#475569">Powered by ClockOS</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#products">Halo</a>
+        <a href="#products">Beacon</a>
+        <a href="#products">Beacon+</a>
+        <a href="#products">Intercom</a>
+        <a href="#products">Entry</a>
+        <a href="#products">Pulse</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="#">ClockOS</a>
+        <a href="#">Admin dashboard</a>
+        <a href="#">Alert system</a>
+        <a href="#">ClockOS Lite</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Kova</a>
+        <a href="#">For districts</a>
+        <a href="#">Pricing</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Kova. All rights reserved.</span>
+    <span>Privacy · Terms · Accessibility</span>
+  </div>
+</footer>
+
+<script>
+function handleSubmit() {
+  const input = document.getElementById('email-input');
+  const note = document.getElementById('form-note');
+  if (!input.value || !input.value.includes('@')) {
+    input.style.borderColor = 'rgba(239,68,68,0.6)';
+    return;
+  }
+  input.style.borderColor = 'rgba(34,197,94,0.6)';
+  note.textContent = "✓ You're on the list! We'll be in touch soon.";
+  note.style.opacity = '1';
+  input.value = '';
+  setTimeout(() => { input.style.borderColor = ''; }, 2000);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }});
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.product-card, .price-card, .hiw-step, .alert-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
