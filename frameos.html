@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrameOS — The Operating System for Kova Frame</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:      #7C3AED;
+  --purple-mid:  #A78BFA;
+  --purple-light:#EDE9FE;
+  --blue:        #2563EB;
+  --ink:         #0F172A;
+  --ink-mid:     #334155;
+  --slate:       #64748B;
+  --faint:       #94A3B8;
+  --rule:        rgba(255,255,255,0.08);
+  --rule-light:  #E2E8F0;
+  --bg-dark:     #080B14;
+  --bg-dark2:    #0D1220;
+  --bg-card:     rgba(255,255,255,0.04);
+  --radius:      14px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-dark); color: #f0f0ee; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 60px;
+  background: rgba(8,11,20,0.85); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#fff; text-decoration:none; letter-spacing:-0.5px; }
+.nav-logo span { color: var(--purple-mid); }
+.nav-back { font-size:13px; color:#64748B; text-decoration:none; display:flex; align-items:center; gap:6px; transition:color 0.15s; }
+.nav-back:hover { color:#f0f0ee; }
+.nav-cta { background:var(--purple); color:#fff; padding:8px 18px; border-radius:10px; font-size:13px; font-weight:500; text-decoration:none; transition:all 0.15s; }
+.nav-cta:hover { background:#6D28D9; transform:translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 5% 80px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 80% 40%, rgba(124,58,237,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 10% 80%, rgba(37,99,235,0.08) 0%, transparent 70%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+  background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.hero-content { max-width: 580px; position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3);
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 500; color: var(--purple-mid);
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 {
+  font-size: clamp(48px, 7vw, 82px); font-weight: 800;
+  letter-spacing: -2.5px; line-height: 1.0;
+  margin-bottom: 6px;
+  animation: fadeUp 0.6s 0.05s ease both;
+}
+.hero h1 .os { color: var(--purple-mid); }
+.hero-version {
+  font-family: 'DM Mono', monospace; font-size: 13px;
+  color: rgba(124,58,237,0.6); margin-bottom: 22px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-sub {
+  font-size: 18px; font-weight: 300; color: #94A3B8;
+  line-height: 1.65; margin-bottom: 40px; max-width: 500px;
+  animation: fadeUp 0.6s 0.15s ease both;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.6s 0.2s ease both; }
+.btn-primary {
+  background: var(--purple); color: #fff; padding: 13px 26px;
+  border-radius: 12px; font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+}
+.btn-primary:hover { background: #6D28D9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.5); }
+.btn-ghost {
+  background: transparent; color: #f0f0ee; padding: 13px 26px;
+  border-radius: 12px; font-size: 14px; font-weight: 500;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+/* FRAME MOCKUP */
+.hero-visual {
+  position: absolute; right: 4%; top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  animation: fadeUp 0.8s 0.25s ease both;
+}
+.frame-mockup {
+  width: 420px; background: #0a0a10;
+  border-radius: 18px; overflow: hidden;
+  border: 1.5px solid rgba(124,58,237,0.3);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,58,237,0.1), inset 0 0 80px rgba(124,58,237,0.03);
+}
+.frame-topbar {
+  background: rgba(124,58,237,0.08); border-bottom: 1px solid rgba(124,58,237,0.15);
+  padding: 10px 16px; display: flex; align-items: center; gap: 10px;
+}
+.frame-dots { display: flex; gap: 5px; }
+.frame-dot { width: 8px; height: 8px; border-radius: 50%; }
+.frame-title { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(124,58,237,0.6); margin-left: 4px; }
+.frame-os-badge { margin-left: auto; font-size: 9px; font-weight: 600; color: var(--purple-mid); background: rgba(124,58,237,0.15); padding: 2px 8px; border-radius: 10px; letter-spacing: 0.05em; }
+.frame-content { padding: 20px; }
+.frame-sidebar-layout { display: grid; grid-template-columns: 1fr 160px; gap: 12px; }
+.frame-main-area {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; height: 200px; padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.frame-lesson-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+.frame-lesson-content { flex: 1; }
+.frame-lesson-line { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 6px; }
+.frame-lesson-line.active { background: rgba(124,58,237,0.4); width: 80%; }
+.frame-lesson-line.short { width: 60%; }
+.frame-lesson-line.shorter { width: 45%; }
+.frame-sidebar {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.frame-widget {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 12px;
+}
+.frame-widget-label { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 6px; }
+.frame-clock { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: #f0f0ee; line-height: 1; }
+.frame-period { font-size: 9px; color: rgba(124,58,237,0.7); margin-top: 3px; }
+.frame-alert-strip {
+  background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.25);
+  border-radius: 8px; padding: 8px 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.frame-alert-dot { width: 6px; height: 6px; border-radius: 50%; background: #DC2626; animation: blink 1s infinite; }
+.frame-alert-text { font-size: 9px; font-weight: 600; color: #FCA5A5; }
+.frame-sub-mode {
+  background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.2);
+  border-radius: 10px; padding: 10px 12px; margin-top: 10px;
+}
+.frame-sub-label { font-size: 9px; color: #34D399; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+.frame-sub-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
+.frame-student { background: rgba(5,150,105,0.1); border-radius: 4px; padding: 4px 2px; text-align: center; }
+.frame-student-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(5,150,105,0.3); margin: 0 auto 2px; display: flex; align-items: center; justify-content: center; font-size: 6px; color: #34D399; font-weight: 700; }
+.frame-student-name { font-size: 6px; color: rgba(255,255,255,0.5); }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+/* COMPARE STRIP */
+.compare-strip {
+  background: rgba(124,58,237,0.06); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 20px 5%; display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
+}
+.compare-item {
+  flex: 1; min-width: 140px; max-width: 200px; text-align: center;
+  padding: 0 20px; border-right: 1px solid var(--rule);
+}
+.compare-item:last-child { border-right: none; }
+.compare-val { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--purple-mid); margin-bottom: 3px; }
+.compare-lbl { font-size: 11px; color: #475569; }
+
+/* FEATURES */
+.features-section { padding: 90px 5%; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; color: var(--purple-mid); }
+.section-heading { font-size: clamp(30px,4vw,48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 14px; color: #f0f0ee; }
+.section-sub { font-size: 17px; font-weight: 300; color: #64748B; max-width: 520px; line-height: 1.65; }
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 48px; }
+.feat-card {
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius); padding: 22px;
+  transition: all 0.2s;
+}
+.feat-card:hover { background: rgba(124,58,237,0.06); border-color: rgba(124,58,237,0.2); transform: translateY(-3px); }
+.feat-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(124,58,237,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 14px; }
+.feat-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #f0f0ee; margin-bottom: 6px; }
+.feat-desc { font-size: 13px; color: #64748B; line-height: 1.6; }
+
+/* VS SECTION */
+.vs-section { background: #0D1220; padding: 90px 5%; }
+.vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: start; margin-top: 48px; }
+.vs-col { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 24px; }
+.vs-col.highlight { background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.25); }
+.vs-col-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.vs-col-sub { font-size: 12px; color: #475569; margin-bottom: 18px; }
+.vs-row { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; color: #94A3B8; margin-bottom: 10px; line-height: 1.5; }
+.vs-check { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+.vs-badge { display: inline-flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #475569; padding: 20px; }
+
+/* SPECS */
+.specs-section { padding: 90px 5%; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden; }
+.spec-cell { background: var(--bg-dark2); padding: 18px 22px; }
+.spec-key { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #475569; margin-bottom: 4px; }
+.spec-val { font-size: 14px; font-weight: 500; color: #f0f0ee; }
+.spec-note { font-size: 11px; color: #475569; margin-top: 2px; }
+
+/* CTA */
+.cta-section { padding: 90px 5%; text-align: center; }
+.cta-box { max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.1)); border: 1px solid rgba(124,58,237,0.25); border-radius: 24px; padding: 56px 48px; }
+.cta-box h2 { font-size: clamp(26px,4vw,40px); font-weight: 800; letter-spacing: -1px; color: #f0f0ee; margin-bottom: 12px; }
+.cta-box p { font-size: 16px; color: #64748B; margin-bottom: 32px; line-height: 1.6; }
+.cta-form { display: flex; gap: 8px; max-width: 380px; margin: 0 auto; }
+.cta-input { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 11px 14px; color: #f0f0ee; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; }
+.cta-input:focus { border-color: rgba(124,58,237,0.5); }
+.cta-input::placeholder { color: #475569; }
+.cta-btn { background: var(--purple); color: #fff; padding: 11px 20px; border-radius: 10px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; transition: all 0.15s; }
+.cta-btn:hover { background: #6D28D9; }
+
+/* FOOTER */
+footer { background: #050709; border-top: 1px solid rgba(255,255,255,0.05); padding: 36px 5% 24px; }
+.footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px; }
+.footer-brand { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; }
+.footer-brand span { color: var(--purple-mid); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: #334155; text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: #64748B; }
+.footer-copy { font-size: 12px; color: #1E293B; }
+
+@media(max-width:900px) { .hero-visual { display: none; } .vs-grid { grid-template-columns: 1fr; } .vs-badge { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="products.html" class="nav-back">← All products</a>
+  <a href="index.html#contact" class="nav-cta">Get early access</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">For Kova Frame · Smart Board OS</div>
+    <h1>Frame<span class="os">OS</span></h1>
+    <div class="hero-version">v1.0 · Exclusive to Kova Frame</div>
+    <p class="hero-sub">The operating system built exclusively for the Kova Frame smart board. Sub Mode, lesson delivery, full-screen emergency alerts, and ClockOS integration — purpose-built for the front of the classroom.</p>
+    <div class="hero-actions">
+      <a href="index.html#contact" class="btn-primary">Get early access</a>
+      <a href="frame.html" class="btn-ghost">View Kova Frame →</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="frame-mockup">
+      <div class="frame-topbar">
+        <div class="frame-dots">
+          <div class="frame-dot" style="background:#FF5F57"></div>
+          <div class="frame-dot" style="background:#FFBD2E"></div>
+          <div class="frame-dot" style="background:#28C840"></div>
+        </div>
+        <span class="frame-title">FrameOS · Room 204</span>
+        <span class="frame-os-badge">FrameOS</span>
+      </div>
+      <div class="frame-content">
+        <div class="frame-sidebar-layout">
+          <div class="frame-main-area">
+            <div class="frame-lesson-title">Period 3 · English · Lesson plan</div>
+            <div class="frame-lesson-content">
+              <div class="frame-lesson-line active"></div>
+              <div class="frame-lesson-line" style="margin-top:10px;width:90%"></div>
+              <div class="frame-lesson-line short" style="margin-top:10px"></div>
+              <div class="frame-lesson-line shorter" style="margin-top:10px"></div>
+              <div class="frame-lesson-line" style="margin-top:10px;width:75%"></div>
+            </div>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <div style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:4px 10px;font-size:9px;color:#A78BFA;font-weight:600">HDMI Input</div>
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:4px 10px;font-size:9px;color:#475569">Sub Mode</div>
+            </div>
+          </div>
+          <div class="frame-sidebar">
+            <div class="frame-widget">
+              <div class="frame-widget-label">ClockOS sync</div>
+              <div class="frame-clock" id="frame-time">10:24</div>
+              <div class="frame-period">Period 3 · 18 min</div>
+            </div>
+            <div class="frame-alert-strip">
+              <div class="frame-alert-dot"></div>
+              <div class="frame-alert-text">Alert ready</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-sub-mode">
+          <div class="frame-sub-label">Sub Mode — seating chart</div>
+          <div class="frame-sub-grid">
+            <div class="frame-student"><div class="frame-student-dot">J</div><div class="frame-student-name">Jordan</div></div>
+            <div class="frame-student"><div class="frame-student-dot">M</div><div class="frame-student-name">Maya</div></div>
+            <div class="frame-student"><div class="frame-student-dot">L</div><div class="frame-student-name">Liam</div></div>
+            <div class="frame-student"><div class="frame-student-dot">S</div><div class="frame-student-name">Sofia</div></div>
+            <div class="frame-student"><div class="frame-student-dot">E</div><div class="frame-student-name">Ethan</div></div>
+            <div class="frame-student"><div class="frame-student-dot">A</div><div class="frame-student-name">Aria</div></div>
+            <div class="frame-student"><div class="frame-student-dot">N</div><div class="frame-student-name">Noah</div></div>
+            <div class="frame-student"><div class="frame-student-dot">Z</div><div class="frame-student-name">Zoe</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-family:'DM Mono',monospace;font-size:10px;color:#1E293B">Kova Frame · 65" · Powered by FrameOS</div>
+  </div>
+</section>
+
+<!-- COMPARE STRIP -->
+<div class="compare-strip">
+  <div class="compare-item"><div class="compare-val">55"–75"</div><div class="compare-lbl">Display size</div></div>
+  <div class="compare-item"><div class="compare-val">Full touch</div><div class="compare-lbl">Input method</div></div>
+  <div class="compare-item"><div class="compare-val">Sub Mode</div><div class="compare-lbl">Exclusive feature</div></div>
+  <div class="compare-item"><div class="compare-val">ClockOS sync</div><div class="compare-lbl">Alert integration</div></div>
+  <div class="compare-item"><div class="compare-val">HDMI in</div><div class="compare-lbl">Laptop input</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="section-label">What FrameOS does</div>
+  <h2 class="section-heading">Built for the teacher.<br>Seen by every student.</h2>
+  <p class="section-sub">FrameOS turns the Kova Frame into the smartest display in the classroom — and the most important safety screen in the building.</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon">👤</div><div class="feat-title">Sub Mode</div><div class="feat-desc">When a substitute is assigned, FrameOS activates Sub Mode — showing the seating chart with student photos, step-by-step lesson plan, behavior notes, and emergency procedures. Everything a sub needs, nothing they have to hunt for.</div></div>
+    <div class="feat-card"><div class="feat-icon">📺</div><div class="feat-title">HDMI lesson display</div><div class="feat-desc">Teachers plug in their laptop via HDMI. FrameOS shows lesson content full-screen while keeping a persistent ClockOS sidebar showing the time, period, and alert status.</div></div>
+    <div class="feat-card"><div class="feat-icon">🚨</div><div class="feat-title">Full-screen emergency override</div><div class="feat-desc">When a ClockOS alert is pushed, FrameOS immediately overrides everything — lesson content, Sub Mode, whatever is showing — with the full-screen color alert. No alert goes unseen in the room.</div></div>
+    <div class="feat-card"><div class="feat-icon">✏️</div><div class="feat-title">Touch + stylus input</div><div class="feat-desc">Full 10-point touch and active stylus support. Teachers annotate lessons, students interact with content, subs tap through the lesson plan. FrameOS manages all input states.</div></div>
+    <div class="feat-card"><div class="feat-icon">🔗</div><div class="feat-title">ClockOS sync</div><div class="feat-desc">FrameOS stays in constant sync with ClockOS — bell schedule, alert states, announcements, and period information all flow automatically from the same server that runs every Halo and Beacon in the building.</div></div>
+    <div class="feat-card"><div class="feat-icon">📋</div><div class="feat-title">Attendance + incident log</div><div class="feat-desc">In Sub Mode, subs mark attendance directly on the seating chart and log incidents. Teacher receives a full day summary automatically — the sub day is never a black hole of lost instruction.</div></div>
+  </div>
+</section>
+
+<!-- FRAMEOS vs CLOCKOS -->
+<section class="vs-section">
+  <div class="section-label">FrameOS vs ClockOS</div>
+  <h2 class="section-heading">Different screens.<br>Different jobs.</h2>
+  <p class="section-sub">FrameOS and ClockOS are two separate operating systems designed for two very different roles in the classroom.</p>
+  <div class="vs-grid">
+    <div class="vs-col highlight">
+      <div class="vs-col-title" style="color:#A78BFA">FrameOS</div>
+      <div class="vs-col-sub">Kova Frame · front of classroom · teacher-facing</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>55"–75" full touchscreen smart board</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>Sub Mode with seating chart + lesson plan</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>HDMI lesson content input</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>Stylus + full touch input</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>Full-screen alert override</div>
+      <div class="vs-row"><span class="vs-check" style="color:#A78BFA">✓</span>Attendance + incident logging</div>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="vs-col">
+      <div class="vs-col-title" style="color:#60A5FA">ClockOS</div>
+      <div class="vs-col-sub">Halo + Beacon · wall clock · room-facing</div>
+      <div class="vs-row"><span class="vs-check" style="color:#60A5FA">✓</span>24" circular wall clock display</div>
+      <div class="vs-row"><span class="vs-check" style="color:#60A5FA">✓</span>Real-time time, date, period, bell schedule</div>
+      <div class="vs-row"><span class="vs-check" style="color:#60A5FA">✓</span>LED ring ambient alert lighting</div>
+      <div class="vs-row"><span class="vs-check" style="color:#60A5FA">✓</span>PA audio announcements</div>
+      <div class="vs-row"><span class="vs-check" style="color:#60A5FA">✓</span>Minimal touch — volume + brightness only</div>
+      <div class="vs-row" style="color:#334155"><span class="vs-check">✕</span>No Sub Mode — no general touch</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="specs-section">
+  <div class="section-label">System requirements</div>
+  <h2 class="section-heading">What FrameOS runs on.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Hardware</div><div class="spec-val">Kova Frame only</div><div class="spec-note">FrameOS is not available for third-party displays</div></div>
+    <div class="spec-cell"><div class="spec-key">Display sizes</div><div class="spec-val">55" · 65" · 75" 4K IPS</div><div class="spec-note">Full 10-point touch + active stylus</div></div>
+    <div class="spec-cell"><div class="spec-key">Compute</div><div class="spec-val">Octa-core ARM · 8GB RAM · 64GB storage</div><div class="spec-note">Android 13 base · FrameOS layer on top</div></div>
+    <div class="spec-cell"><div class="spec-key">ClockOS server</div><div class="spec-val">Required — same server as Halo/Beacon</div><div class="spec-note">FrameOS connects to your existing ClockOS server</div></div>
+    <div class="spec-cell"><div class="spec-key">Sub Mode activation</div><div class="spec-val">Auto via ClockOS dashboard or SubFinder</div><div class="spec-note">Manual activation also available</div></div>
+    <div class="spec-cell"><div class="spec-key">HDMI input</div><div class="spec-val">HDMI 2.0 · 4K@60Hz · auto-detect</div><div class="spec-note">Teacher laptop plugs in, content shows instantly</div></div>
+    <div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">Ethernet + WiFi 6 + BLE 5.0</div><div class="spec-note">Wired ethernet recommended for reliable alerts</div></div>
+    <div class="spec-cell"><div class="spec-key">Pricing</div><div class="spec-val">Included with Kova Frame</div><div class="spec-note">Not sold separately — exclusive to Frame hardware</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>Put FrameOS in<br>every classroom.</h2>
+    <p>Join the waitlist for Kova Frame and be among the first schools to run FrameOS when it launches.</p>
+    <div class="cta-form">
+      <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+      <button class="cta-btn" onclick="handleCta()">Join waitlist</button>
+    </div>
+    <p style="font-size:12px;color:#1E293B;margin-top:12px" id="cta-msg">Free pilot program available for qualifying schools.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">Kova<span>.</span></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="clockos.html">ClockOS</a>
+      <a href="clockos-lite.html">ClockOS Lite</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Kova. FrameOS is exclusive to Kova Frame hardware.</div>
+</footer>
+
+<script>
+function tick() {
+  const n = new Date(); let h = n.getHours() % 12 || 12;
+  const m = String(n.getMinutes()).padStart(2,'0');
+  document.getElementById('frame-time').textContent = h + ':' + m;
+}
+tick(); setInterval(tick, 10000);
+function handleCta() {
+  const el = document.getElementById('cta-email');
+  if (!el.value || !el.value.includes('@')) { el.style.borderColor='rgba(239,68,68,0.4)'; return; }
+  document.getElementById('cta-msg').textContent = "✓ You're on the list!";
+  document.getElementById('cta-msg').style.color = '#34D399'; el.value = '';
+}
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}}),{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell,.vs-col').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(14px)'; el.style.transition='opacity 0.5s ease,transform 0.5s ease'; obs.observe(el); });
+</script>
+</body>
+</html>
