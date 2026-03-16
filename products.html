@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Products — Kova Campus Display System</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.products-hero { background:linear-gradient(135deg,#0F172A,#1E293B); color:#fff; padding:110px 5% 70px; }
+.products-hero h1 { color:#fff; font-size:clamp(36px,5vw,60px); font-weight:800; letter-spacing:-2px; margin-bottom:14px; }
+.products-hero p { font-size:18px; color:#94A3B8; font-weight:300; max-width:520px; line-height:1.65; }
+.family-label { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#94A3B8; margin:48px 0 16px; padding-bottom:10px; border-bottom:1px solid #E2E8F0; }
+.product-link-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-bottom:8px; }
+.product-link-card {
+  background:#fff; border:1.5px solid #E2E8F0; border-radius:16px; padding:20px;
+  text-decoration:none; color:inherit; transition:all 0.2s; display:block;
+}
+.product-link-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(15,23,42,0.1); border-color:transparent; }
+.plc-eyebrow { font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; }
+.plc-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; margin-bottom:4px; color:#0F172A; }
+.plc-desc { font-size:13px; color:#64748B; line-height:1.5; }
+.plc-arrow { font-size:12px; margin-top:12px; font-weight:500; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html" class="nav-back">← <span>Home</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+
+<div class="products-hero">
+  <div class="hero-eyebrow" style="color:#60A5FA;margin-bottom:16px"><div class="hero-eyebrow-dot" style="background:#60A5FA"></div>Full product lineup</div>
+  <h1>Every product<br>Kova makes.</h1>
+  <p>From classroom displays to bus tracking — one ecosystem, one dashboard, one ClockOS platform.</p>
+</div>
+
+<div style="padding:0 5% 80px;background:#F8FAFC">
+
+<div class="family-label">Halo family — circular displays</div>
+<div class="product-link-grid">
+  <a href="halo.html" class="product-link-card" style="border-left:4px solid #2563EB">
+    <div class="plc-eyebrow" style="color:#2563EB">Premium · Classroom</div>
+    <div class="plc-name">Halo</div>
+    <div class="plc-desc">Circular display with LED ring alerts and full ClockOS. The flagship.</div>
+    <div class="plc-arrow" style="color:#2563EB">View Halo →</div>
+  </a>
+  <a href="halo-intercom.html" class="product-link-card" style="border-left:4px solid #2563EB">
+    <div class="plc-eyebrow" style="color:#2563EB">Premium · Two-way audio</div>
+    <div class="plc-name">Halo Intercom</div>
+    <div class="plc-desc">Halo with retractable mic arm and physical Announce button.</div>
+    <div class="plc-arrow" style="color:#2563EB">View Halo Intercom →</div>
+  </a>
+  <a href="entry.html" class="product-link-card" style="border-left:4px solid #0891B2">
+    <div class="plc-eyebrow" style="color:#0891B2">Entrance · Security</div>
+    <div class="plc-name">Entry</div>
+    <div class="plc-desc">Circular entrance display. Visitor welcome, check-in, and emergency lockout.</div>
+    <div class="plc-arrow" style="color:#0891B2">View Entry →</div>
+  </a>
+</div>
+
+<div class="family-label">Beacon family — rectangular displays</div>
+<div class="product-link-grid">
+  <a href="beacon.html" class="product-link-card" style="border-left:4px solid #059669">
+    <div class="plc-eyebrow" style="color:#059669">Budget · Hallways + gyms</div>
+    <div class="plc-name">Beacon</div>
+    <div class="plc-desc">Rectangular budget display. Full ClockOS, dual speakers, PoE install.</div>
+    <div class="plc-arrow" style="color:#059669">View Beacon →</div>
+  </a>
+  <a href="beacon-plus.html" class="product-link-card" style="border-left:4px solid #059669">
+    <div class="plc-eyebrow" style="color:#059669">Mid-tier · Classrooms</div>
+    <div class="plc-name">Beacon+</div>
+    <div class="plc-desc">Beacon with LED edge strip, school branding, and optional mic.</div>
+    <div class="plc-arrow" style="color:#059669">View Beacon+ →</div>
+  </a>
+  <a href="pulse.html" class="product-link-card" style="border-left:4px solid #D97706">
+    <div class="plc-eyebrow" style="color:#D97706">Alert-focused · Security offices</div>
+    <div class="plc-name">Pulse</div>
+    <div class="plc-desc">All emergency protocols visible at all times. One tap to activate any alert.</div>
+    <div class="plc-arrow" style="color:#D97706">View Pulse →</div>
+  </a>
+  <a href="intercom.html" class="product-link-card" style="border-left:4px solid #7C3AED">
+    <div class="plc-eyebrow" style="color:#7C3AED">Portrait · Two-way audio</div>
+    <div class="plc-name">Intercom</div>
+    <div class="plc-desc">Portrait display with retractable mic arm and physical Announce button.</div>
+    <div class="plc-arrow" style="color:#7C3AED">View Intercom →</div>
+  </a>
+</div>
+
+<div class="family-label">Smart features — ClockOS software</div>
+<div class="product-link-grid">
+  <a href="sub.html" class="product-link-card" style="border-left:4px solid #059669">
+    <div class="plc-eyebrow" style="color:#059669">Software · Classroom</div>
+    <div class="plc-name">Sub Mode</div>
+    <div class="plc-desc">Halo switches to substitute teacher mode automatically — seating chart, lesson plan, behavior notes, emergency info.</div>
+    <div class="plc-arrow" style="color:#059669">View Sub Mode →</div>
+  </a>
+  <a href="clockos.html" class="product-link-card" style="border-left:4px solid #0891B2">
+    <div class="plc-eyebrow" style="color:#0891B2">OS · Powers everything</div>
+    <div class="plc-name">ClockOS</div>
+    <div class="plc-desc">The operating system on every Kova device. Admin dashboard, 16 screen states, real-time alerts.</div>
+    <div class="plc-arrow" style="color:#0891B2">View ClockOS →</div>
+  </a>
+</div>
+
+<div class="family-label">Transportation suite</div>
+<div class="product-link-grid">
+  <a href="bus.html" class="product-link-card" style="border-left:4px solid #D97706">
+    <div class="plc-eyebrow" style="color:#D97706">Hardware · In-bus</div>
+    <div class="plc-name">Bus</div>
+    <div class="plc-desc">Ruggedized in-bus display showing route, stop, headcount, and ClockOS alerts.</div>
+    <div class="plc-arrow" style="color:#D97706">View Bus →</div>
+  </a>
+  <a href="route.html" class="product-link-card" style="border-left:4px solid #2563EB">
+    <div class="plc-eyebrow" style="color:#2563EB">Software · GPS tracking</div>
+    <div class="plc-name">Route</div>
+    <div class="plc-desc">Real-time GPS tracking for every bus. Parents see the live map and ETA to their stop.</div>
+    <div class="plc-arrow" style="color:#2563EB">View Route →</div>
+  </a>
+  <a href="check.html" class="product-link-card" style="border-left:4px solid #7C3AED">
+    <div class="plc-eyebrow" style="color:#7C3AED">Hardware + App · Student ID</div>
+    <div class="plc-name">Check</div>
+    <div class="plc-desc">Rotating digital student ID + NFC/QR bus boarding scanner. Lost cards neutralized instantly.</div>
+    <div class="plc-arrow" style="color:#7C3AED">View Check →</div>
+  </a>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+</body>
+</html>

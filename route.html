@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Route — Kova Bus Tracking Platform</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#EFF6FF 0%,#ECFEFF 100%); }
+.hero h1 em { font-style:normal; color:#2563EB; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Route</span></div>
+    <div class="hero-eyebrow" style="color:#2563EB"><div class="hero-eyebrow-dot" style="background:#2563EB"></div>Kova Route · GPS tracking + parent app</div>
+    <h1 class="fade-up">Every parent knows<br><em>where the bus is.</em></h1>
+    <p class="hero-sub fade-up-2">Real-time GPS tracking for every bus in the district. Parents see the live map and ETA to their stop. Dispatchers manage the full fleet from one dashboard.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#2563EB;box-shadow:0 4px 14px #2563EB44">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#2563EB">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📍</div><div class="feat-title">Real-time GPS tracking</div><div class="feat-desc">Every Kova Bus transmits live location. See your entire fleet on one map, updated every 10 seconds.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">👨‍👩‍👧</div><div class="feat-title">Parent live map</div><div class="feat-desc">Parents open the Kova Companion app and see exactly where their child's bus is with a precise ETA to their stop.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">⚡</div><div class="feat-title">Delay alerts</div><div class="feat-desc">Dispatcher pushes a delay or route change — parents and drivers are notified instantly via app and Bus display.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">🗺️</div><div class="feat-title">Route optimization</div><div class="feat-desc">AI-suggested route optimization reduces total bus mileage and cuts fuel costs across the district.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📊</div><div class="feat-title">Trip analytics</div><div class="feat-desc">Every trip logged — start time, end time, route, delays, stops. Automatic compliance reporting for district requirements.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">🔗</div><div class="feat-title">Kova ecosystem sync</div><div class="feat-desc">Feeds live data to Kova Bus displays, Kova Sub stops, and parent Companion app — one source of truth.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#2563EB">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">GPS update rate</div><div class="spec-val">Every 10 seconds · ±3 meter accuracy</div></div>
+<div class="spec-cell"><div class="spec-key">Parent app</div><div class="spec-val">iOS + Android · live map + push notifications</div></div>
+<div class="spec-cell"><div class="spec-key">Dashboard</div><div class="spec-val">Web-based · full fleet view · dispatch tools</div></div>
+<div class="spec-cell"><div class="spec-key">Integration</div><div class="spec-val">Kova Bus · Kova Check · Kova Sub stop displays</div></div>
+<div class="spec-cell"><div class="spec-key">Pricing</div><div class="spec-val">SaaS · $2–5 per bus per month</div></div>
+<div class="spec-cell"><div class="spec-key">Data</div><div class="spec-val">Stored on district server · FERPA compliant</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Give every parent peace of mind.</h2>
+  <p>Route brings real-time bus visibility to parents, drivers, and dispatchers — all from one platform.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

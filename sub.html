@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sub Mode — Kova Substitute Teacher Support</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#ECFDF5 0%,#EFF6FF 100%); }
+.hero h1 em { font-style:normal; color:#059669; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Sub Mode</span></div>
+    <div class="hero-eyebrow" style="color:#059669"><div class="hero-eyebrow-dot" style="background:#059669"></div>Kova Sub · Substitute teacher intelligence</div>
+    <h1 class="fade-up">The sub walks in.<br><em>Everything is ready.</em></h1>
+    <p class="hero-sub fade-up-2">When a substitute is assigned, the Halo display automatically switches to Sub Mode — showing the seating chart, lesson plan, student behavior notes, and emergency procedures. No hunting for anything.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#059669;box-shadow:0 4px 14px #05966944">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#059669">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">👤</div><div class="feat-title">Seating chart with names</div><div class="feat-desc">Student names and photos arranged in the actual classroom layout. Sub matches faces to names instantly — no introductions needed.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📋</div><div class="feat-title">Step-by-step lesson plan</div><div class="feat-desc">The teacher's lesson broken into numbered steps. Current step highlighted. Sub taps to mark complete as the period progresses.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">⚠️</div><div class="feat-title">Behavior and support flags</div><div class="feat-desc">Discrete flags for students with behavior notes or accommodations — visible only when the sub taps the student's name.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FEF2F2">🚨</div><div class="feat-title">Emergency procedures</div><div class="feat-desc">Fire exit route, lockdown instructions, office extension, and neighboring teacher contact — always one tap away.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">📊</div><div class="feat-title">End-of-day summary</div><div class="feat-desc">Sub logs which lesson steps were completed and any incidents. Teacher receives a full summary automatically.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">✅</div><div class="feat-title">Attendance tracking</div><div class="feat-desc">Sub marks absent students directly on the seating chart. Syncs to your SIS automatically.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#059669">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Hardware required</div><div class="spec-val">Any Halo or Beacon+ — no new hardware needed</div></div>
+<div class="spec-cell"><div class="spec-key">Activation</div><div class="spec-val">Auto-triggers when sub assigned in ClockOS or SubFinder</div></div>
+<div class="spec-cell"><div class="spec-key">Data</div><div class="spec-val">Lesson plan + seating chart set up by teacher in advance</div></div>
+<div class="spec-cell"><div class="spec-key">Privacy</div><div class="spec-val">Student data FERPA-compliant · never leaves district server</div></div>
+<div class="spec-cell"><div class="spec-key">Integration</div><div class="spec-val">SubFinder · Frontline/AESOP · Google Classroom</div></div>
+<div class="spec-cell"><div class="spec-key">Pricing</div><div class="spec-val">ClockOS Pro add-on · $2–5 per classroom per month</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Make every sub day a good one.</h2>
+  <p>Sub Mode runs on the Halo already in the classroom — no extra hardware required.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

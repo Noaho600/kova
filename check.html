@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Check — Kova Student Boarding ID</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%); }
+.hero h1 em { font-style:normal; color:#7C3AED; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Check</span></div>
+    <div class="hero-eyebrow" style="color:#7C3AED"><div class="hero-eyebrow-dot" style="background:#7C3AED"></div>Kova Check · Student ID + bus boarding</div>
+    <h1 class="fade-up">Secure boarding.<br><em>Instant parent alerts.</em></h1>
+    <p class="hero-sub fade-up-2">A rotating digital student ID in the Companion app — plus NFC/QR scanner at the bus door. Lost cards are neutralized in seconds. Parents notified on every scan.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#7C3AED;box-shadow:0 4px 14px #7C3AED44">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#7C3AED">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">🔄</div><div class="feat-title">Rotating QR code</div><div class="feat-desc">Student ID in the Companion app refreshes every 60 seconds — screenshots expire immediately, screenshots are useless.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EDE9FE">🪪</div><div class="feat-title">Physical card fallback</div><div class="feat-desc">RFID backup card for students without phones — verified against live database, instantly remotely disableable.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">⚡</div><div class="feat-title">Instant remote disable</div><div class="feat-desc">Lost or stolen card? Admin disables it in 10 seconds from the ClockOS dashboard. Dead immediately at every scanner.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EDE9FE">👨‍👩‍👧</div><div class="feat-title">Parent push notifications</div><div class="feat-desc">Every boarding scan sends a real-time notification: 'Jordan boarded Bus 42 at 7:34 AM.'</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">👥</div><div class="feat-title">Live headcount</div><div class="feat-desc">Real-time count on the Kova Bus display — driver always knows exactly how many students are aboard.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EDE9FE">🔗</div><div class="feat-title">SIS sync</div><div class="feat-desc">Student roster, photos, and bus assignments sync from your existing Student Information System.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#7C3AED">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Primary credential</div><div class="spec-val">Rotating QR in Companion app · 60-second refresh</div></div>
+<div class="spec-cell"><div class="spec-key">Fallback</div><div class="spec-val">RFID card · database-verified · instant remote disable</div></div>
+<div class="spec-cell"><div class="spec-key">Scanner</div><div class="spec-val">NFC + QR reader · mounts to bus door frame · IP54</div></div>
+<div class="spec-cell"><div class="spec-key">Parent alerts</div><div class="spec-val">Push notification on every scan via Companion app</div></div>
+<div class="spec-cell"><div class="spec-key">Integration</div><div class="spec-val">Kova Route · Kova Bus · SIS sync</div></div>
+<div class="spec-cell"><div class="spec-key">Privacy</div><div class="spec-val">FERPA compliant · no student data on card · database lookup only</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Secure boarding. Every student. Every bus.</h2>
+  <p>Check makes lost ID cards harmless and gives parents real-time visibility into every boarding event.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

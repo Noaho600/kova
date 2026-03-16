@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Entry — Kova Building Entrance Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#ECFEFF 0%,#EFF6FF 100%); }
+.hero h1 em { font-style:normal; color:#0891B2; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Entry</span></div>
+    <div class="hero-eyebrow" style="color:#0891B2"><div class="hero-eyebrow-dot" style="background:#0891B2"></div>Entry · Building entrance display</div>
+    <h1 class="fade-up">Welcome everyone.<br><em>Secure everything.</em></h1>
+    <p class="hero-sub fade-up-2">A circular entrance display that greets visitors, directs foot traffic, and instantly locks down in an emergency — the first and last line of your campus security perimeter.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#0891B2;box-shadow:0 4px 14px #0891B244">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#0891B2">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">👋</div><div class="feat-title">Visitor welcome</div><div class="feat-desc">Displays school name, today's date, and a directional prompt — Welcome ↑ — guiding visitors to the office without a separate sign.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🪪</div><div class="feat-title">Visitor check-in</div><div class="feat-desc">Tap-to-check-in mode turns Entry into a light visitor management terminal during school hours.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">🔒</div><div class="feat-title">Emergency lockout</div><div class="feat-desc">During lockdown, Entry displays a locked state and can integrate with door lock hardware — exterior doors secured from the admin dashboard.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📞</div><div class="feat-title">Office intercom</div><div class="feat-desc">Built-in speaker and optional mic for two-way communication between the entrance and the front office.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">◎</div><div class="feat-title">Circular form factor</div><div class="feat-desc">Matches Halo's design language — visitors see the same display family inside the building and at the entrance.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📡</div><div class="feat-title">Full ClockOS alerts</div><div class="feat-desc">All safety alerts push to Entry simultaneously with classroom displays — the entrance is always in sync with the rest of the building.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#0891B2">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">10.1" circular IPS touchscreen · 1280×800</div></div>
+<div class="spec-cell"><div class="spec-key">LED ring</div><div class="spec-val">24-LED NeoPixel RGB ring · alert lighting</div></div>
+<div class="spec-cell"><div class="spec-key">Audio</div><div class="spec-val">3W speaker · optional mic for two-way</div></div>
+<div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">PoE (802.3af) + WiFi 6</div></div>
+<div class="spec-cell"><div class="spec-key">OS</div><div class="spec-val">ClockOS with Entry mode · visitor check-in</div></div>
+<div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">Exterior-rated enclosure · wall plate mount</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>The first impression and the last line of defense.</h2>
+  <p>Entry brings ClockOS to your building entrance — welcoming visitors and securing the campus simultaneously.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

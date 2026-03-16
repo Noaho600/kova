@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bus — Kova In-Bus Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#FFFBEB 0%,#FEF9C3 100%); }
+.hero h1 em { font-style:normal; color:#D97706; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Bus</span></div>
+    <div class="hero-eyebrow" style="color:#D97706"><div class="hero-eyebrow-dot" style="background:#D97706"></div>Kova Bus · In-bus ruggedized display</div>
+    <h1 class="fade-up">The school day<br><em>starts on the bus.</em></h1>
+    <p class="hero-sub fade-up-2">A ruggedized display mounted at the front of every school bus — showing route info, student headcount, next stop, and receiving ClockOS safety alerts in real time.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#D97706;box-shadow:0 4px 14px #D9770644">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#D97706">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">🚌</div><div class="feat-title">Route and stop display</div><div class="feat-desc">Current route, next stop, and estimated arrival time — always visible to the driver without taking their eyes off the road.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FEF9C3">👥</div><div class="feat-title">Live student headcount</div><div class="feat-desc">Integrates with Kova Check to show real-time boarding count. Driver always knows who's on the bus.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">📡</div><div class="feat-title">ClockOS safety alerts</div><div class="feat-desc">Receives the same lockdown and emergency alerts as classroom displays — drivers know immediately when school status changes.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">📞</div><div class="feat-title">Dispatch communication</div><div class="feat-desc">One-tap communication to district dispatch. Driver can report issues without using a personal device.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">🛡️</div><div class="feat-title">Ruggedized housing</div><div class="feat-desc">Vibration-resistant, temperature-rated enclosure built for bus environments. IP54 rated.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FEF9C3">📶</div><div class="feat-title">Cellular + WiFi</div><div class="feat-desc">Stays connected on route via 4G LTE. Falls back to WiFi when at school.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#D97706">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">7" IPS · 1024×600 · glare-resistant</div></div>
+<div class="spec-cell"><div class="spec-key">Housing</div><div class="spec-val">Ruggedized · vibration-resistant · IP54</div></div>
+<div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">4G LTE + WiFi 5 · always-on cellular</div></div>
+<div class="spec-cell"><div class="spec-key">Power</div><div class="spec-val">12V vehicle power · low-power standby between routes</div></div>
+<div class="spec-cell"><div class="spec-key">OS</div><div class="spec-val">ClockOS Bus · stripped transport build</div></div>
+<div class="spec-cell"><div class="spec-key">Integration</div><div class="spec-val">Kova Route GPS · Kova Check boarding scanner</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Connect your fleet to ClockOS.</h2>
+  <p>Kova Bus brings real-time awareness to every driver and every dispatcher.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

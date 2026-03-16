@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Beacon+ — Kova Campus Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#ECFDF5 0%,#F5F3FF 100%); }
+.hero h1 em { font-style:normal; color:#059669; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Beacon+</span></div>
+    <div class="hero-eyebrow" style="color:#059669"><div class="hero-eyebrow-dot" style="background:#059669"></div>Beacon+ · Mid-tier rectangular display</div>
+    <h1 class="fade-up">Beacon features.<br><em>Halo power.</em></h1>
+    <p class="hero-sub fade-up-2">Everything in Beacon, plus the LED edge strip, school branding, and optional intercom mic — bringing Halo-level features to a rectangular form factor.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#059669;box-shadow:0 4px 14px #05966944">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#059669">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">▭+</div><div class="feat-title">LED edge strip</div><div class="feat-desc">RGB LED strip runs along all four edges of the display — same alert colors as the Halo ring, adapted for rectangular form.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🏫</div><div class="feat-title">School branding</div><div class="feat-desc">Display your school name, motto, and colors. Fully customizable per room or building-wide via ClockOS dashboard.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">🎙️</div><div class="feat-title">Optional mic add-on</div><div class="feat-desc">Upgrade with the intercom mic module for two-way audio — bringing Beacon+ to full Halo Intercom capability.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">📡</div><div class="feat-title">Full ClockOS</div><div class="feat-desc">All 16 screen states including Sub Mode, countdown timers, announcements, and the full alert system.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">⚡</div><div class="feat-title">PoE powered</div><div class="feat-desc">Single ethernet cable. Mounts where your existing clock is. No electrician needed.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">🏷️</div><div class="feat-title">Mid-tier pricing</div><div class="feat-desc">More affordable than Halo, more capable than Beacon. The right choice for classrooms on a budget.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#059669">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">10.1" IPS touchscreen · 1280×800 · landscape</div></div>
+<div class="spec-cell"><div class="spec-key">LED strip</div><div class="spec-val">Full-perimeter RGB LED strip · 48 LEDs · full color</div></div>
+<div class="spec-cell"><div class="spec-key">Audio</div><div class="spec-val">Dual 3W speakers · optional mic HAT</div></div>
+<div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">PoE (802.3af) + WiFi 6</div></div>
+<div class="spec-cell"><div class="spec-key">OS</div><div class="spec-val">ClockOS full · Sub Mode · LED strip control</div></div>
+<div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">Wall plate · VESA 75mm compatible</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Classroom-ready at a mid-tier price.</h2>
+  <p>Beacon+ brings full Halo capability to schools with rectangular wall constraints.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

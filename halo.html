@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Halo — Kova Campus Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#EFF6FF 0%,#F5F3FF 60%,#EFF6FF 100%); }
+.hero h1 em { font-style:normal; background:linear-gradient(135deg,#2563EB,#7C3AED); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.halo-vis {
+  width:300px; height:300px; border-radius:50%;
+  background:linear-gradient(135deg,#c7f2e8,#bee3f8,#d4c5f9);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:6px solid rgba(255,255,255,0.9);
+  box-shadow:0 24px 80px rgba(37,99,235,0.2), 0 0 0 12px rgba(37,99,235,0.06);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.halo-time { font-family:'Syne',sans-serif; font-size:60px; font-weight:800; color:#0F172A; line-height:1; }
+.halo-school { font-size:12px; color:#334155; margin-top:6px; }
+.halo-period { font-size:11px; color:#64748B; margin-top:3px; }
+.led-ring { position:absolute; width:340px; height:340px; border-radius:50%; border:3px solid rgba(37,99,235,0.2); animation:ledPulse 3s ease-in-out infinite; }
+@keyframes ledPulse { 0%,100%{opacity:0.3;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.02)} }
+.alert-demo { position:absolute; bottom:-30px; right:-20px; background:#fff; border-radius:12px; padding:10px 14px; box-shadow:0 8px 24px rgba(0,0,0,0.12); border:1px solid #E2E8F0; font-size:12px; width:180px; }
+.alert-demo-dot { width:8px; height:8px; border-radius:50%; background:#DC2626; display:inline-block; margin-right:6px; animation:blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Halo</span></div>
+    <div class="hero-eyebrow" style="color:#2563EB"><div class="hero-eyebrow-dot" style="background:#2563EB"></div>Halo · Premium classroom display</div>
+    <h1 class="fade-up">The classroom wall,<br><em>reimagined.</em></h1>
+    <p class="hero-sub fade-up-2">A circular campus display that shows schedules, pushes instant emergency alerts, and is managed from a single dashboard — running ClockOS.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+  <div class="hero-visual" style="position:absolute;right:8%;top:50%;transform:translateY(-50%)">
+    <div style="position:relative;width:340px;height:340px;display:flex;align-items:center;justify-content:center">
+      <div class="led-ring"></div>
+      <div class="halo-vis">
+        <div class="halo-time" id="halo-time">10:24</div>
+        <div class="halo-school">Lets R.I.S.E. Panthers</div>
+        <div class="halo-period">Period 3 · 18 min left</div>
+      </div>
+      <div class="alert-demo">
+        <span class="alert-demo-dot"></span>
+        <strong style="font-size:11px">Alert ready</strong>
+        <div style="font-size:10px;color:#64748B;margin-top:2px">Push to all devices instantly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="section-label" style="color:#2563EB">Why Halo</div>
+  <h2 class="section-heading">Everything the old clock<br>should have been.</h2>
+  <p class="section-sub">Halo mounts where your existing clock is. One ethernet cable. No electrician. Up in 30 minutes.</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">◎</div><div class="feat-title">Circular display</div><div class="feat-desc">Signature circular IPS touchscreen — visually distinct from every other display on the wall. Students and staff know immediately what it is.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">◉</div><div class="feat-title">LED ring alerts</div><div class="feat-desc">RGB LED ring around the entire display face. Red for fire, dark blue for lockdown, amber for hold — visible from the hallway without reading the screen.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">⏰</div><div class="feat-title">Live bell schedule</div><div class="feat-desc">Current period, time remaining, and next bell displayed at all times. Syncs with your district's bell schedule automatically.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">📡</div><div class="feat-title">Instant alerts</div><div class="feat-desc">Full-screen color-coded emergency alerts pushed from the ClockOS dashboard reach every Halo in the building in under 100ms.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">🔊</div><div class="feat-title">Built-in speaker</div><div class="feat-desc">PA-quality speaker for audio announcements and alert tones — no separate intercom speaker needed.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">⚡</div><div class="feat-title">PoE powered</div><div class="feat-desc">Single ethernet cable provides both power and connectivity. No power outlet needed at the clock location.</div></div>
+  </div>
+</section>
+
+<section class="specs-section">
+  <div class="section-label" style="color:#2563EB">Specifications</div>
+  <h2 class="section-heading">Built for the classroom.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">10.1" circular IPS touchscreen · 1280×800</div></div>
+    <div class="spec-cell"><div class="spec-key">Compute</div><div class="spec-val">Raspberry Pi CM4 · 4GB RAM · 32GB eMMC</div></div>
+    <div class="spec-cell"><div class="spec-key">Alert lighting</div><div class="spec-val">24-LED NeoPixel RGB ring · full color control</div></div>
+    <div class="spec-cell"><div class="spec-key">Audio</div><div class="spec-val">3W built-in speaker · 80dB at 1m</div></div>
+    <div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">PoE (802.3af) + WiFi 6 + optional cellular</div></div>
+    <div class="spec-cell"><div class="spec-key">OS</div><div class="spec-val">ClockOS · 16 screen states · remote MDM</div></div>
+    <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">Replaces standard clock wall plate · VESA compatible</div></div>
+    <div class="spec-cell"><div class="spec-key">Operating temp</div><div class="spec-val">0°C – 50°C · standard classroom environment</div></div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="section-label" style="color:#64748B">What Halo is not</div>
+  <h2 class="section-heading">Clear boundaries.</h2>
+  <div class="not-grid">
+    <div class="not-item"><span class="not-x">✕</span><span>Not a surveillance device. Halo does not record audio or video.</span></div>
+    <div class="not-item"><span class="not-x">✕</span><span>Not a general tablet. ClockOS runs in locked kiosk mode.</span></div>
+    <div class="not-item"><span class="not-x">✕</span><span>Not a phone system replacement — it complements existing PA infrastructure.</span></div>
+    <div class="not-item"><span class="not-x">✕</span><span>Not a digital signage board. No ads, no social feeds, no content management.</span></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to put Halo in your school?</h2>
+  <p>Join the waitlist for early access and pilot pricing for Broward County schools.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program available for qualifying districts.</p>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">Kova<span>.</span></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+
+<script>
+function tick() {
+  const now = new Date();
+  let h = now.getHours() % 12 || 12;
+  const m = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('halo-time').textContent = h + ':' + m;
+}
+tick(); setInterval(tick, 10000);
+function handleCta() {
+  const el = document.getElementById('cta-email');
+  if (!el.value || !el.value.includes('@')) { el.style.borderColor='rgba(239,68,68,0.5)'; return; }
+  document.getElementById('cta-msg').textContent = "✓ You're on the list! We'll be in touch soon.";
+  document.getElementById('cta-msg').style.color = '#34D399';
+  el.value = '';
+}
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}}),{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el => { el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el); });
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pulse — Kova Alert Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%); }
+.hero h1 em { font-style:normal; color:#D97706; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Pulse</span></div>
+    <div class="hero-eyebrow" style="color:#D97706"><div class="hero-eyebrow-dot" style="background:#D97706"></div>Pulse · Alert-grid classroom display</div>
+    <h1 class="fade-up">Every protocol.<br><em>Always visible.</em></h1>
+    <p class="hero-sub fade-up-2">A rectangular display with all emergency alert types visible at all times — for safety offices, front desks, and security-critical rooms where fast response matters most.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#D97706;box-shadow:0 4px 14px #D9770644">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#D97706">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">⚠️</div><div class="feat-title">Persistent alert grid</div><div class="feat-desc">Hold, Secure, Lockdown, Evacuate, Shelter, Fire — all visible simultaneously without any navigation. One glance, full situational awareness.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FEF3C7">🖱️</div><div class="feat-title">One-tap activation</div><div class="feat-desc">Any alert type is one tap from the display itself — no phone, no laptop, no dashboard required in a crisis.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">📡</div><div class="feat-title">Full ClockOS</div><div class="feat-desc">Also shows time, date, and period when no alert is active. Sub Mode, announcements, and countdown timers all work normally.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">🔊</div><div class="feat-title">High-volume speaker</div><div class="feat-desc">Loud enough for open common areas and security offices with ambient noise.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">⚡</div><div class="feat-title">PoE powered</div><div class="feat-desc">Single ethernet cable install — standard Kova installation.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FEF3C7">🏫</div><div class="feat-title">Best for security spaces</div><div class="feat-desc">Front offices, principal suites, safety offices, and any room where staff need instant alert capability.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#D97706">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">10.1" IPS touchscreen · 1280×800 · landscape</div></div>
+<div class="spec-cell"><div class="spec-key">UI</div><div class="spec-val">Persistent 2×3 alert grid · clock header bar</div></div>
+<div class="spec-cell"><div class="spec-key">Audio</div><div class="spec-val">5W high-volume speaker</div></div>
+<div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">PoE (802.3af) + WiFi 6</div></div>
+<div class="spec-cell"><div class="spec-key">OS</div><div class="spec-val">ClockOS with always-on alert grid mode</div></div>
+<div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">Wall plate · VESA 75mm compatible</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Fast response when it matters most.</h2>
+  <p>Pulse puts every emergency protocol one tap away, every second of the day.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

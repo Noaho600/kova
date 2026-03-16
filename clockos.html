@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ClockOS — The Kova Campus Operating System</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#ECFEFF 0%,#EFF6FF 100%); }
+.hero h1 em { font-style:normal; color:#0891B2; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>ClockOS</span></div>
+    <div class="hero-eyebrow" style="color:#0891B2"><div class="hero-eyebrow-dot" style="background:#0891B2"></div>ClockOS · Campus operating system</div>
+    <h1 class="fade-up">One OS.<br><em>Every Kova device.</em></h1>
+    <p class="hero-sub fade-up-2">ClockOS is the operating system that powers every Halo, Beacon, Bus, and Intercom display. Manage your entire campus from a single web-based dashboard — alerts, schedules, and devices all in one place.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#0891B2;box-shadow:0 4px 14px #0891B244">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#0891B2">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">⚡</div><div class="feat-title">Real-time alerts</div><div class="feat-desc">Push any of 8 alert types to every device in the building in under 100ms — from any browser, any device, anywhere.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🗺️</div><div class="feat-title">Building floor map</div><div class="feat-desc">Visual map of your campus with live device status — green for online, red for alert active, gray for offline.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">📅</div><div class="feat-title">Bell schedule management</div><div class="feat-desc">Set and sync bell schedules for every room and every campus. Updates push to all devices instantly.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🎨</div><div class="feat-title">Custom branding</div><div class="feat-desc">School name, logo, colors, and motto — customized per room or building-wide in minutes.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFEFF">📱</div><div class="feat-title">Remote MDM</div><div class="feat-desc">Update, reboot, and configure any device remotely. OTA updates roll out overnight without IT touching a single unit.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🔒</div><div class="feat-title">16 screen states</div><div class="feat-desc">Idle, alert, Sub Mode, countdown, announcement, passing period, PA broadcast, offline — every scenario handled.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#0891B2">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Platform</div><div class="spec-val">React + Electron on Raspberry Pi CM4</div></div>
+<div class="spec-cell"><div class="spec-key">Backend</div><div class="spec-val">Node.js + Socket.io · self-hosted on district server</div></div>
+<div class="spec-cell"><div class="spec-key">Alert speed</div><div class="spec-val">< 100ms broadcast to all connected devices</div></div>
+<div class="spec-cell"><div class="spec-key">Dashboard</div><div class="spec-val">Web-based · works on any browser · mobile-friendly</div></div>
+<div class="spec-cell"><div class="spec-key">Updates</div><div class="spec-val">OTA via Balena OS · automatic overnight rollout</div></div>
+<div class="spec-cell"><div class="spec-key">Pricing</div><div class="spec-val">Included with all Kova hardware purchases</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>One platform. Every room.</h2>
+  <p>ClockOS ships on every Kova device — no separate software purchase, no subscription required in v1.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>

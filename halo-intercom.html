@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Halo Intercom — Kova Premium Two-Way Display</title>
+<link rel="stylesheet" href="kova-shared.css">
+<style>
+.hero { background: linear-gradient(135deg,#EFF6FF 0%,#F5F3FF 100%); }
+.hero h1 em { font-style:normal; color:#2563EB; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Kova<span>.</span></a>
+  <a href="index.html#products" class="nav-back">← <span>All products</span></a>
+  <a href="index.html#contact" class="nav-cta">Request demo</a>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="index.html">Kova</a> › <span>Halo Intercom</span></div>
+    <div class="hero-eyebrow" style="color:#2563EB"><div class="hero-eyebrow-dot" style="background:#2563EB"></div>Halo Intercom · Circular display + two-way audio</div>
+    <h1 class="fade-up">Halo.<br><em>With a voice.</em></h1>
+    <p class="hero-sub fade-up-2">Everything in Halo, plus a retractable mic arm and physical Announce button — the complete classroom intercom and display system in one circular unit.</p>
+    <div class="hero-actions fade-up-3">
+      <a href="index.html#contact" class="btn-primary" style="background:#2563EB;box-shadow:0 4px 14px #2563EB44">Request a demo</a>
+      <a href="index.html#pricing" class="btn-outline">See pricing</a>
+    </div>
+  </div>
+</section>
+<section style="background:#fff">
+  <div class="section-label" style="color:#2563EB">Features</div>
+  <h2 class="section-heading">Built for the real world.</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">◎</div><div class="feat-title">Everything in Halo</div><div class="feat-desc">Circular display, LED ring alerts, live bell schedule, full ClockOS — all Halo features included.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#F5F3FF">🎙️</div><div class="feat-title">Retractable mic arm</div><div class="feat-desc">Far-field ReSpeaker mic array deploys from the top of the circular housing — stores flush when not in use.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">🔴</div><div class="feat-title">Physical Announce button</div><div class="feat-desc">Hardware button below the display initiates an immediate office call — works even if software is unavailable.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#ECFDF5">🔒</div><div class="feat-title">Push-to-talk privacy</div><div class="feat-desc">Mic is only active when Announce is pressed or an office call is accepted. LED indicator shows mic status.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#EFF6FF">📡</div><div class="feat-title">Two-way audio</div><div class="feat-desc">Crystal clear full-duplex communication between the classroom and the front office.</div></div>
+<div class="feat-card"><div class="feat-icon" style="background:#FFFBEB">⚡</div><div class="feat-title">PoE powered</div><div class="feat-desc">Single ethernet cable — same installation as standard Halo.</div></div>
+  </div>
+</section>
+<section class="specs-section">
+  <div class="section-label" style="color:#2563EB">Specifications</div>
+  <h2 class="section-heading">The details.</h2>
+  <div class="specs-grid">
+    <div class="spec-cell"><div class="spec-key">Display</div><div class="spec-val">10.1" circular IPS touchscreen · 1280×800</div></div>
+<div class="spec-cell"><div class="spec-key">LED ring</div><div class="spec-val">24-LED NeoPixel RGB · full alert colors</div></div>
+<div class="spec-cell"><div class="spec-key">Microphone</div><div class="spec-val">ReSpeaker 2-mic far-field array · retractable arm</div></div>
+<div class="spec-cell"><div class="spec-key">Audio</div><div class="spec-val">3W speaker · full-duplex two-way intercom</div></div>
+<div class="spec-cell"><div class="spec-key">Controls</div><div class="spec-val">Physical Announce button · LED privacy indicator</div></div>
+<div class="spec-cell"><div class="spec-key">Connectivity</div><div class="spec-val">PoE (802.3af) + WiFi 6</div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>The complete classroom display and intercom.</h2>
+  <p>Halo Intercom replaces both your clock and your intercom box in one installation.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="Your school email" id="cta-email"/>
+    <button class="cta-btn" onclick="handleCta()">Get early access</button>
+  </div>
+  <p style="font-size:12px;color:#475569;margin-top:12px" id="cta-msg">Free pilot program for qualifying districts.</p>
+</section>
+<footer>
+  <div class="footer-top"><div class="footer-brand">Kova<span>.</span></div><div class="footer-links"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="footer-copy">© 2026 Kova. Powered by ClockOS.</div>
+</footer>
+<script>
+function handleCta(){const el=document.getElementById('cta-email');if(!el.value||!el.value.includes('@')){el.style.borderColor='rgba(239,68,68,0.5)';return;}document.getElementById('cta-msg').textContent="✓ You're on the list!";document.getElementById('cta-msg').style.color='#34D399';el.value='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';}})  ,{threshold:0.1});
+document.querySelectorAll('.feat-card,.spec-cell').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(12px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el);});
+</script>
+</body>
+</html>
